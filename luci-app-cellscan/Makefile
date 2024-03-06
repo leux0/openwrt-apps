@@ -8,6 +8,7 @@ PKG_MAINTAINER:=newton_miku
 include $(INCLUDE_DIR)/package.mk
 
 define Package/luci-app-cellscan
+    PKGARCH:=all
     SECTION:=luci
     CATEGORY:=LuCI
     SUBMENU:=3. Applications
