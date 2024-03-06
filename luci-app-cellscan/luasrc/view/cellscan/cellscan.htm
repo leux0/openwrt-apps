@@ -1,0 +1,96 @@
+<%+header%>
+
+<style>
+    .cbi-map {
+        background-color: #f9f9f9;
+        padding: 20px;
+        margin: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        
+    }
+    .cbi-map h2 {
+        color: #333;
+    }
+    .cbi-map table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .cbi-map th, .cbi-map td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    .cbi-map th {
+        background-color: rgb(255, 111, 0); /* 表头背景设置为橘黄色 */
+        color: rgb(255, 255, 255); /* 表头文字颜色设为黑色 */
+    }
+    .cbi-map .cbi-section-table tr:nth-child(even) {
+        background-color: rgb(244, 244, 244); /* 表格内容背景设置为粉色 */
+    }
+    .cbi-map .large-button {
+        width: 100%;
+        background-color: rgb(255, 191, 0);
+        color: rgb(255, 255, 255);
+        border: none;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="cbi-map">
+    <h2>基站扫描</h2>
+    <h4>
+        警告：请勿开机后立刻进行此操作，等待模块空闲时再执行。【执行扫描动作】 按钮的冷却时间为一分钟。<br>
+        说明：点击 【执行扫描动作】 开始扫描，数分钟后待扫描完成再点击 【读取扫描数据按钮】 加载扫描后的本地缓存结果
+    </h4>
+    <br>
+    <div style="display: flex; justify-content: space-around;">
+        <form id="switchForm" method="post" action="<%= luci.dispatcher.build_url('admin', 'modem', 'cellscan', 'switch2') %>">
+            <input type="hidden" name="confirm" value="yes">
+            <input type="submit" value="执行扫描动作" class="large-button" onclick="return confirm('你确定吗？')">
+        </form>
+        <div style="width: 10px;"></div>
+        <button onclick="location.reload();" class="large-button">读取扫描数据</button>
+    </div>
+    <br>
+    <p>
+        <table id="results-table" class="cbi-section-table">
+            <tr>
+                <th>网络制式</th>
+                <th>运营商ISP</th>
+                <th>频段 Band</th>
+                <th>频点 EARFCN</th>
+                <th>物理小区标识 PCI </th>
+                <th>信号强度RSRP</th>
+                <th>接收质量 RSRQ</th>
+            </tr>
+            <% 
+            local controller = require("luci.controller.cellscan")
+            local results = controller.parse_results() or {}
+            if #results > 0 then
+                for _, result in ipairs(results) do
+            %>
+            <tr>
+                <td><%= result.mode %></td>
+                <td><%= result.operator %></td>
+                <td><%= result.band %></td>
+                <td><%= result.earfcn %></td>
+                <td><%= result.pci %></td>
+                <td><%= result.rsrp %></td>
+                <td><%= result.rsrq %></td>
+            </tr>
+            <% end
+            else
+            %>
+            <tr>
+                <td colspan="7">当前未读取到本地缓存结果，扫描中......</td>
+            </tr>
+            <% end %>
+        </table>
+    </p>
+</div>
+<%+footer%>
+
