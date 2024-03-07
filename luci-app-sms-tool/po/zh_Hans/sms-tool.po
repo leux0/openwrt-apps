@@ -1,0 +1,73 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+"Language: pl\n"
+"Last-Translator: alextuldi - From OpenWrt forum\n"
+
+msgid "SMS Recv Messages"
+msgstr "收短信"
+
+msgid "Web UI for receiveling messages via sms_tool"
+msgstr "短信存在接收延迟，请勿频繁刷新信息"
+
+msgid "Received Messages"
+msgstr "接收短信"
+
+msgid "Messages store in"
+msgstr "信息存储在"
+
+msgid "Messages (Inbox / Maximum)"
+msgstr "信息（收件箱/最大）"
+
+msgid "From"
+msgstr "来自"
+
+msgid "Received"
+msgstr "时间"
+
+msgid "Message"
+msgstr "内容"
+
+msgid "Refresh SMS"
+msgstr "刷新短信"
+
+msgid "Delete message(s)"
+msgstr "删除短信"
+
+msgid "Web UI for sending messages via sms_tool"
+msgstr "号码前缀的86是中国请勿删除，除非是发送境外短信，前面不需要+号"
+
+msgid "SMS sent sucessfully"
+msgstr "短信已发送。(如不准确请查看日志：/tmp/sms.log)"
+
+msgid "Please enter phone number"
+msgstr "请输入号码"
+
+msgid "Please correct phone number"
+msgstr "请更正号码"
+
+msgid "Please enter a message text"
+msgstr "请输入内容"
+
+msgid "Send Message"
+msgstr "发短信"
+
+msgid "Send Messages"
+msgstr "发送短信"
+
+msgid "User Phonebook"
+msgstr "电话簿"
+
+msgid "Send to"
+msgstr "收信号码"
+
+msgid "PHONE_NUMBER"
+msgstr "电话号码"
+
+msgid "Message text"
+msgstr "发送内容"
+
+msgid "Status"
+msgstr "执行状态"
+
+

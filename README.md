@@ -13,6 +13,7 @@ src-git leux_apps https://github.com/leux0/openwrt-apps.git;main
 ```
  > LuCI > 3. Applications > luci-app-cellscan
  > LuCI > 3. Applications > luci-app-modemband
+ > LuCI > 3. Applications > luci-app-sms-tool
  > LuCI > 3. Applications > luci-app-sms-tool-js
  > Network > modemband
  > Utilities > sms-tool
@@ -23,8 +24,10 @@ src-git leux_apps https://github.com/leux0/openwrt-apps.git;main
 ```
 opkg install modemband sms-tool
 opkg install luci-app-modemband luci-app-sms-tool-js luci-app-cellscan
-opkg install luci-i18n-modemband-zh-cn luci-i18n-sms-tool-js-zh-cn 
+opkg install luci-i18n-modemband-zh-cn luci-i18n-sms-tool-js-zh-cn
+opkg install luci-app-sms-tool luci-i18n-sms-tool-zh-cn
 
+opkg remove luci-i18n-sms-tool-zh-cn luci-app-sms-tool
 opkg remove luci-i18n-modemband-zh-cn luci-i18n-sms-tool-js-zh-cn 
 opkg remove luci-app-modemband luci-app-sms-tool-js luci-app-cellscan
 opkg remove modemband sms-tool
@@ -51,3 +54,6 @@ https://github.com/4IceG/luci-app-sms-tool-js
 3. **luci-app-modemband**
 ![luci-app-modemband](img/modemband.png)
 
+
+4. **luci-app-sms-tool**
+![luci-app-sms-tool](img/sms-rxtx.png)
