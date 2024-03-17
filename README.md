@@ -17,6 +17,7 @@ src-git leux_apps https://github.com/leux0/openwrt-apps.git;main
  > LuCI > 3. Applications > luci-app-sms-tool-js
  > Network > modemband
  > Utilities > sms-tool
+ > Multimedia > ustreamer
 ```
 
 # 安装卸载顺序
@@ -57,3 +58,10 @@ https://github.com/4IceG/luci-app-sms-tool-js
 
 4. **luci-app-sms-tool**
 ![luci-app-sms-tool](img/sms-rxtx.png)
+
+
+5. **ustreamer**
+
+ustreamer是RK3588平台将HDMI输入转成在线观看的软件，需要自行配置好HDMIRX支持
+![ustreamer](img/ustreamer.png)
+
