@@ -16,28 +16,13 @@ module("luci.controller.sms", package.seeall)
 -- I18N = require "luci.i18n"
 -- translate = I18N.translate
 function index()
-	-- entry({"admin", "modem"}, firstchild(), "模块", 30).dependent=false
-	-- entry({"admin", "modem", "sms"}, alias("admin", "modem", "sms", "readsms"), translate("SMS Messages"), 10)
-	-- entry({"admin", "modem", "sms", "readsms"},template("modem/readsms"),translate("Received Messages"), 10)
- 	-- entry({"admin", "modem", "sms", "sendsms"},template("modem/sendsms"),translate("Send Messages"), 20)
+	entry({"admin", "modem"}, firstchild(), "Modem", 40).dependent=false
 	entry({"admin", "modem", "readsms"},template("modem/readsms"),translate("Received Messages"), 20)
  	entry({"admin", "modem", "sendsms"},template("modem/sendsms"),translate("Send Messages"), 30)
- 	-- entry({"admin", "modem", "sms", "ussd"},template("modem/ussd"),translate("USSD Codes"), 30)
-	-- entry({"admin", "modem", "sms", "atcommands"},template("modem/atcommands"),translate("AT Commands"), 40)
-	if nixio.fs.access("/etc/config/smsconfig") then
-        entry({"admin", "modem", "smsconfig"}, cbi("smsconfig"),translate("Configuration"), 50)
-    end
-	-- entry({"admin", "modem", "smsconfig"},cbi("smsconfig"),translate("Configuration"), 50)
 	entry({"admin", "modem", "delete_one"}, call("delete_sms", smsindex), nil).leaf = true
 	entry({"admin", "modem", "delete_all"}, call("delete_all_sms"), nil).leaf = true
-	-- entry({"admin", "modem", "sms", "run_ussd"}, call("ussd"), nil).leaf = true
-	-- entry({"admin", "modem", "sms", "run_at"}, call("at"), nil).leaf = true
 	entry({"admin", "modem", "run_sms"}, call("sms"), nil).leaf = true
 	entry({"admin", "modem", "readsim"}, call("slots"), nil).leaf = true
-	-- entry({"admin", "modem", "countsms"}, call("count_sms"), nil).leaf = true
-	-- entry({"admin", "modem", "sms", "user_ussd"}, call("userussd"), nil).leaf = true
-	-- entry({"admin", "modem", "sms", "user_atc"}, call("useratc"), nil).leaf = true
-	-- entry({"admin", "modem", "sms", "user_phonebook"}, call("userphb"), nil).leaf = true
 end
 
 

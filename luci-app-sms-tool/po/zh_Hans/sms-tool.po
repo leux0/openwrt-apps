@@ -4,6 +4,9 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 "Language: pl\n"
 "Last-Translator: alextuldi - From OpenWrt forum\n"
 
+msgid "Modem"
+msgstr "模块"
+
 msgid "SMS Recv Messages"
 msgstr "收短信"
 
@@ -58,16 +61,16 @@ msgstr "发送短信"
 msgid "User Phonebook"
 msgstr "电话簿"
 
-msgid "Send to"
-msgstr "收信号码"
+msgid "Send to:"
+msgstr "收信号码："
 
 msgid "PHONE_NUMBER"
 msgstr "电话号码"
 
-msgid "Message text"
-msgstr "发送内容"
+msgid "Message text:"
+msgstr "发送内容："
 
-msgid "Status"
-msgstr "执行状态"
+msgid "Result:"
+msgstr "执行结果："
 
 

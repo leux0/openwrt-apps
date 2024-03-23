@@ -1,7 +1,7 @@
 module("luci.controller.cellscan", package.seeall)
 
 function index()
-    entry({"admin", "modem"}, firstchild(), _("模块"), 25).dependent=false
+    entry({"admin", "modem"}, firstchild(), _("模块"), 40).dependent=false
     entry({"admin", "modem", "cellscan"}, template("cellscan/cellscan"), _("基站扫描"), 80).dependent = true
     entry({"admin", "modem", "cellscan", "switch2"}, call("action_switch2"), nil)
 end
