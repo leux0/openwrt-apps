@@ -1,10 +1,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-cellscan
-PKG_VERSION:=1.01
-PKG_RELEASE:=3
+PKG_VERSION:=1.10
+PKG_RELEASE:=1
 
-PKG_MAINTAINER:=newton_miku
+PKG_MAINTAINER:=leux
 include $(INCLUDE_DIR)/package.mk
 
 define Package/luci-app-cellscan
@@ -13,7 +13,7 @@ define Package/luci-app-cellscan
     CATEGORY:=LuCI
     SUBMENU:=3. Applications
     TITLE:=Cell Scan Results
-    DEPENDS:=+lua +lua-cjson +coreutils-timeout
+    DEPENDS:=+coreutils-timeout
 endef
 
 
@@ -31,9 +31,9 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_DATA) ./luasrc/view/cellscan/* $(1)/usr/lib/lua/luci/view/cellscan/
 	
 	$(INSTALL_DIR) $(1)/usr/share/modem/
-	$(INSTALL_BIN) ./keyPairCellScan.sh $(1)/usr/share/modem/keyPairCellScan.sh
+	$(INSTALL_BIN) ./cellscan.sh $(1)/usr/share/modem/cellscan.sh
 	
-	chmod +x $(1)/usr/share/modem/keyPairCellScan.sh
+	chmod +x $(1)/usr/share/modem/cellscan.sh
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))
