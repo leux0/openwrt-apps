@@ -45,14 +45,14 @@ function parse_results()
         cellinfo:close()
     else
         table.insert(controller, {
-            mode = "wait for ctrl...",
-            operator = "",
-            band = "",
-            freq = "",
-            pci = "",
-            rsrp = "",
-            rsrq = "",
-            scs = ""
+            mode = "NULL",
+            operator = "NULL",
+            band = "NULL",
+            freq = "NULL",
+            pci = "NULL",
+            rsrp = "NULL",
+            rsrq = "NULL",
+            scs = "NULL"
         })
     end
     return controller

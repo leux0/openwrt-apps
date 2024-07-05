@@ -1,19 +1,6 @@
 <%+header%>
 
 <style>
-    .cbi-map {
-      //background-color: #ffffff;				/* 区域背景设置为白色 */
-        padding: 20px;
-        margin: 20px;
-        border: 1px solid #999999;				/* 区域边缘设置为灰色 */
-        border-radius: 5px;						/* 区域边框角圆角度数 */
-    }
-    .cbi-map h2 {
-        color: #ffffff;							/* 区域标题设置为白色 */
-    }
-    .cbi-map h4 {
-        color: #007fff;							/* 区域警告设置为蓝色 */
-    }
     .cbi-map table {
         width: 100%;							/* 表格宽度设置 */
         border-collapse: collapse;				/* 合并为单一边框 */
@@ -34,32 +21,22 @@
     .cbi-map .cbi-section-table tr:nth-child(odd) {
         background-color: #669999;				/* 表格背景交替设置为青色 */
     }
-    .cbi-map .large-button {
-        width: 100%;							/* 两个按钮的宽度 */
-        background-color: #ff9900;				/* 按钮背景设置为黄色 */
-        color: #ffffff;							/* 按钮字色设置为白色 */
-        border: none;							/* 边框 */
-        padding: 10px;							/* 内边距 */
-        margin: 5px 0;							/* 外边距 */
-        border-radius: 5px;						/* 圆角边框 */
-        cursor: pointer;						/* 鼠标指针到按钮上变手 */
-    }
 </style>
 
 <div class="cbi-map">
     <h2>基站扫描</h2>
-    <h4>
+    <div class="cbi-map-descr">
         警告：请勿开机后立刻进行此操作，等待模块空闲时再执行。【执行扫描脚本】 按钮两次点击中间建议间隔为一分钟<br>
         说明：点击 【执行扫描脚本】 开始扫描，数分钟后待扫描完成再点击 【读取扫描数据】 加载扫描后本地缓存的结果
-    </h4>
+    </div>
     <br>
     <div style="display: flex; justify-content: space-around;">
         <form id="switchForm" method="post" action="<%= luci.dispatcher.build_url('admin', 'modem', 'cellscan', 'switch2') %>">
             <input type="hidden" name="confirm" value="yes">
-            <input type="submit" value="执行扫描脚本" class="large-button" onclick="return confirm('你确定吗？')">
+            <input type="submit" value="执行扫描脚本" class="btn cbi-button cbi-button-remove" onclick="return confirm('你确定吗？')">
         </form>
         <div style="width: 100%;"></div>
-        <button onclick="location.reload();" class="large-button">读取扫描数据</button>
+        <button onclick="location.reload();" class="btn cbi-button cbi-button-reload">读取扫描数据</button>
     </div>
     <br>
     <p>
