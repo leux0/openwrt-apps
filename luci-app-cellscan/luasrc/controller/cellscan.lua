@@ -2,7 +2,7 @@ module("luci.controller.cellscan", package.seeall)
 
 function index()
     entry({"admin", "modem"}, firstchild(), _("模块"), 35).dependent=false
-    entry({"admin", "modem", "cellscan"}, template("cellscan/cellscan"), _("基站扫描"), 80).dependent = true
+    entry({"admin", "modem", "cellscan"}, template("modem/cellscan"), _("基站扫描"), 80).dependent = true
     entry({"admin", "modem", "cellscan", "switch2"}, call("action_switch2"), nil)
 end
 
@@ -28,13 +28,13 @@ function parse_results()
     local cellinfo = io.open("/tmp/cellinfo", "r")
     if cellinfo then
         for line in cellinfo:lines() do
-            local mode, operator, band, earfcn, pci, rsrp, rsrq, scs = line:match('+QSCAN: "(.-)",(.-),(.-),(.-),(.-),(.-),(.-),(.+)')
-            if mode and operator and earfcn and pci and rsrp and rsrq and scs then
+            local mode, operator, band, arfcn, pci, rsrp, rsrq, scs = line:match('+QSCAN: "(.-)",(.-),(.-),(.-),(.-),(.-),(.-),(.+)')
+            if mode and operator and arfcn and pci and rsrp and rsrq and scs then
                 table.insert(controller, {
                     mode = mode,
                     operator = operator,
                     band = band,
-                    earfcn = earfcn,
+                    arfcn = arfcn,
                     pci = pci,
                     rsrp = rsrp,
                     rsrq = rsrq,
@@ -48,7 +48,7 @@ function parse_results()
             mode = "NULL",
             operator = "NULL",
             band = "NULL",
-            earfcn = "NULL",
+            arfcn = "NULL",
             pci = "NULL",
             rsrp = "NULL",
             rsrq = "NULL",
