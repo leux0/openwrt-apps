@@ -28,13 +28,13 @@ function parse_results()
     local cellinfo = io.open("/tmp/cellinfo", "r")
     if cellinfo then
         for line in cellinfo:lines() do
-            local mode, operator, band, freq, pci, rsrp, rsrq, scs = line:match('+QSCAN: "(.-)",(.-),(.-),(.-),(.-),(.-),(.-),(.+)')
-            if mode and operator and freq and pci and rsrp and rsrq and scs then
+            local mode, operator, band, earfcn, pci, rsrp, rsrq, scs = line:match('+QSCAN: "(.-)",(.-),(.-),(.-),(.-),(.-),(.-),(.+)')
+            if mode and operator and earfcn and pci and rsrp and rsrq and scs then
                 table.insert(controller, {
                     mode = mode,
                     operator = operator,
                     band = band,
-                    freq = freq,
+                    earfcn = earfcn,
                     pci = pci,
                     rsrp = rsrp,
                     rsrq = rsrq,
@@ -48,7 +48,7 @@ function parse_results()
             mode = "NULL",
             operator = "NULL",
             band = "NULL",
-            freq = "NULL",
+            earfcn = "NULL",
             pci = "NULL",
             rsrp = "NULL",
             rsrq = "NULL",

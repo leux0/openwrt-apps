@@ -1,53 +1,53 @@
-#!/bin/ash
+#!/bin/sh
 
 TIMEOUTS=60
 ATDEVICE=/dev/ttyUSB3
 CELLINFO=/tmp/cellinfo
 LOCKFILE=/tmp/cellscanlock
 
-freq_to_band() {
-    local freq=$1
+earfcn_to_band() {
+    local earfcn=$1
     local bands=""
 
     # 4G LTE
-	if [ $freq -ge 0 ] && [ $freq -le 41589 ]; then
-		if [ $freq -ge 0 ] && [ $freq -le 599 ]; then
+	if [ $earfcn -ge 0 ] && [ $earfcn -le 41589 ]; then
+		if [ $earfcn -ge 0 ] && [ $earfcn -le 599 ]; then
 			bands="Band 1"
-		elif [ $freq -ge 1200 ] && [ $freq -le 1949 ]; then
+		elif [ $earfcn -ge 1200 ] && [ $earfcn -le 1949 ]; then
 			bands="Band 3"
-		elif [ $freq -ge 2400 ] && [ $freq -le 2649 ]; then
+		elif [ $earfcn -ge 2400 ] && [ $earfcn -le 2649 ]; then
 			bands="Band 5"
-		elif [ $freq -ge 3450 ] && [ $freq -le 3799 ]; then
+		elif [ $earfcn -ge 3450 ] && [ $earfcn -le 3799 ]; then
 			bands="Band 8"
-		elif [ $freq -ge 36200 ] && [ $freq -le 36349 ]; then
+		elif [ $earfcn -ge 36200 ] && [ $earfcn -le 36349 ]; then
 			bands="Band 34"
-		elif [ $freq -ge 37750 ] && [ $freq -le 38249 ]; then
+		elif [ $earfcn -ge 37750 ] && [ $earfcn -le 38249 ]; then
 			bands="Band 38"
-		elif [ $freq -ge 38250 ] && [ $freq -le 38649 ]; then
+		elif [ $earfcn -ge 38250 ] && [ $earfcn -le 38649 ]; then
 			bands="Band 39"
-		elif [ $freq -ge 38650 ] && [ $freq -le 39649 ]; then
+		elif [ $earfcn -ge 38650 ] && [ $earfcn -le 39649 ]; then
 			bands="Band 40"
-		elif [ $freq -ge 39650 ] && [ $freq -le 41589 ]; then
+		elif [ $earfcn -ge 39650 ] && [ $earfcn -le 41589 ]; then
 			bands="Band 41"
 	fi
 	# 以下是5G NR的
-	elif [ $freq -ge 422000 ] && [ $freq -le 434000 ]; then
+	elif [ $earfcn -ge 422000 ] && [ $earfcn -le 434000 ]; then
 		bands="N1"
-	elif [ $freq -ge 361000 ] && [ $freq -le 376000 ]; then
+	elif [ $earfcn -ge 361000 ] && [ $earfcn -le 376000 ]; then
 		bands="N3"
-	elif [ $freq -ge 185000 ] && [ $freq -le 192000 ]; then
+	elif [ $earfcn -ge 185000 ] && [ $earfcn -le 192000 ]; then
 		bands="N8"
-	elif [ $freq -ge 499200 ] && [ $freq -le 537999 ]; then
+	elif [ $earfcn -ge 499200 ] && [ $earfcn -le 537999 ]; then
 		bands="N41"
-	elif [ $freq -ge 620000 ] && [ $freq -le 680000 ]; then
+	elif [ $earfcn -ge 620000 ] && [ $earfcn -le 680000 ]; then
 		bands="N78"
-	elif [ $freq -ge 693334 ] && [ $freq -le 733333 ]; then
+	elif [ $earfcn -ge 693334 ] && [ $earfcn -le 733333 ]; then
 		bands="N79"
 	# 5G NR重复频段检查
-	elif [ $freq -ge 158200 ] && [ $freq -le 164200 ]; then
+	elif [ $earfcn -ge 158200 ] && [ $earfcn -le 164200 ]; then
 		bands="N20"
 	fi
-	if [ $freq -ge 151600 ] && [ $freq -le 160600 ]; then
+	if [ $earfcn -ge 151600 ] && [ $earfcn -le 160600 ]; then
 		[ -n "$bands" ] && bands="${bands}/"
 		bands="${bands}n28"
 	fi
@@ -125,8 +125,8 @@ do
         esac
 
 		# 根据 <载波频点号> 来判断 <频带>
-		FREQ=$(echo "$line" | awk -F ',' '{print $4}')
-		BAND=$(freq_to_band $FREQ)
+		EARFCN=$(echo "$line" | awk -F ',' '{print $4}')
+		BAND=$(earfcn_to_band $EARFCN)
 
 		# 将扫描到的信息格式化记录到文件，"网类型, 运营商, 频段, 频点号, 小区号, 信号强度, 接收质量, 载波间隔\n"
 		echo $line | awk -F ',' -v operator="$operator" -v SCS_KHZ="$SCS_KHZ" -v BAND="$BAND" '{printf("%s,%s,%s,%s,%s,%s,%s,%s\n", $1, operator, BAND, $4, $5, $6, $7, SCS_KHZ)}' >> ${CELLINFO}
